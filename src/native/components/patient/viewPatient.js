@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Content, List, ListItem, Thumbnail, Text, Body, View } from 'native-base';
 import { AsyncStorage, FlatList, ScrollView, TextInput } from 'react-native';
 import DatePicker from 'react-native-datepicker'
-
+import * as firebase from 'firebase'
 var allPatients = [];
 
 export default class ViewPatient extends Component {
@@ -15,7 +15,7 @@ export default class ViewPatient extends Component {
             filter: false,
             date: ''
         }
-        console.log("propssss",this.props)
+        console.log("propssss", this.props)
     }
     static navigationOptions = {
         title: 'View PAtient Details',
@@ -38,11 +38,14 @@ export default class ViewPatient extends Component {
     viewPatient() {
         allPatients = [];
         let Mydata;
-        AsyncStorage.getItem("patientData").then((data) => {
-            Mydata = JSON.parse(data);
-            allPatients = Mydata
-            this.setState({ data: allPatients })
+        firebase.database().ref('Patient').on('child_added', snap => {
+            allPatients = this.state.data
+            allPatients.push(snap.val())
+            this.setState({
+                data: allPatients
+            })
         })
+
     }
     searchByDate(date) {
         this.setState({

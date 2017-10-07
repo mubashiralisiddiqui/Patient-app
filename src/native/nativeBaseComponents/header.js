@@ -1,27 +1,20 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Subtitle } from 'native-base';
-
+import { Container, Left, Body, Right, Button, Icon, Title, Subtitle } from 'native-base';
+import { Header ,Icon} from 'react-native-elements'
 export default class HeaderComponent extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        console.log('Header navigations==>',this.props.addpatientroute)
+        console.log('Header navigations==>', this.props.addpatientroute)
     }
     render() {
         return (
-            <Header>
-                <Left>
-                    <Button transparent >
-                        <Icon name='menu' />
-                    </Button>
-                </Left>
-                <Body>
-                    <Title>Doctor App</Title>
-                    <Subtitle>Manage All Patients</Subtitle>
-                </Body>
-                <Right>
-                </Right>
-            </Header>
+            <Header
+                outerContainerStyles={{ backgroundColor: '#512DA8' }}
+                leftComponent={<Icon name="menu" color="#fff" onPress={() => navigate('DrawerOpen')} />}
+                centerComponent={{ text: 'Patient Management', style: { color: '#fff' } }}
+                rightComponent={<Icon name="home" color="#fff" onPress={() => navigate('Event_LIST')} />}
+            />
 
         );
     }
