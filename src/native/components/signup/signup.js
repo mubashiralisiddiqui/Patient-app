@@ -16,8 +16,6 @@ export default class Signup extends React.Component {
             email: '',
             pasword: '',
             users: [],
-            modalVisible: false,
-            uri: ''
         };
     }
     static navigationOptions = {
@@ -30,8 +28,6 @@ export default class Signup extends React.Component {
             }
         })
     }
-
-
     signup() {
         const {navigate}=this.props.navigation
         let nav = this.props.navigation.navigate
